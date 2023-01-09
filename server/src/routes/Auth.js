@@ -15,18 +15,18 @@ router.post('/login',(req,res)=>{
     res.send("Index");
 });
 
-router.post("/signup", async (req, res) => {
+router.post("/register", async (req, res) => {
     try {
       const {name,username,email,password}=req.body;
       const userId = uuidv4();
       const hashedPassword = await bcrypt.hash(password, 10);
       const token = serverClient.createToken(userId);
-      res.json({ token, userId, firstName, lastName, username, hashedPassword });
+      res.json({ token,userId,name,username,email,hashedPassword });
     } catch (error) {
       res.json(error);
     }
 });
-  
+
 router.post("/login", async (req, res) => {
     try {
       const { username, password } = req.body;
